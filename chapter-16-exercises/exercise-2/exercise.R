@@ -12,7 +12,8 @@ library("ggplot2")
 
 # Draw a column (bar) chart of diamonds cuts by price, with each bar filled by 
 # clarity. You should see a _stacked_ bar chart.
-
+ggplot(data = diamonds_sample) +
+  geom_bar(mapping = aes(x = price, y = clarity))
 
 # Draw the same chart again, but with each element positioned to "fill" the y axis
 
@@ -48,12 +49,17 @@ library("ggplot2")
 # Another interesting plot: draw a plot of the diamonds price (y) by carat (x), 
 # using a heatmap of 2d bins (geom_bin2d)
 # What happens when you make the x and y channels scale logarithmically?
-
+ggplot(data = diamonds_sample) +
+  geom_bin2d(mapping = aes(x=color, y=price))+
+  scale_x_log10() +
+  scale_y_log10()
 
 # Draw a scatter plot for the diamonds price (y) by carat (x). Color each point
 # by the clarity (Remember, this will take a while. Use a sample of the diamonds 
 # for faster results)
-
+ggplot(data = diamonds_sample) +
+  geom_point(mapping = aes(x = carat, y = price, color = clarity)) +
+  scale_color_brewer(palette = "Purples")
 
 # Change the color of the previous plot using a ColorBrewer scale of your choice. 
 # What looks nice?
@@ -79,7 +85,9 @@ library("ggplot2")
 
 # Take the scatter plot of price by carat data (colored by clarity) and add 
 # _facets_ based on the diamond's `color`
-
+ggplot(data = diamonds_sample) +
+  geom_point(mapping = aes(x = carat, y = price, color = clarity))+
+  facet_wrap(-cut)
 
 
 ## Saving Plots
